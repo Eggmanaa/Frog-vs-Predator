@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frog Versus Predator 3D</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="game-canvas"></canvas>
+  
+  <div id="ui-overlay">
+    <h1>FROG VERSUS PREDATOR</h1>
+    <div id="controls">
+      <button id="reset-camera" class="game-button">Reset Camera</button>
+      <button id="reset-game" class="game-button">New Game</button>
+    </div>
+    <div id="instructions">
+      <p>🎮 Click and drag pieces to move them</p>
+      <p>🖱️ Right-click + drag to rotate camera</p>
+      <p>🔍 Scroll to zoom</p>
+    </div>
+  </div>
+  
+  <div id="loading-screen">
+    <div class="loader"></div>
+    <p>Loading game...</p>
+  </div>
+  
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://esm.sh/three@0.168.0",
+        "three/addons/": "https://esm.sh/three@0.168.0/examples/jsm/"
+      }
+    }
+  </script>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
