@@ -368,10 +368,7 @@ export function addBoardBase(scene) {
  * Add the "FROG VERSUS PREDATOR" title
  */
 function addBoardTitle(scene) {
-    // Create a simple 3D text representation
-    const loader = new THREE.FontLoader ? new THREE.FontLoader() : null;
-    
-    // For now, create a simple plate with the title
+    // Create a simple plate with the title using canvas texture
     const titleGeometry = new THREE.PlaneGeometry(350, 30);
     const canvas = document.createElement('canvas');
     canvas.width = 1024;
