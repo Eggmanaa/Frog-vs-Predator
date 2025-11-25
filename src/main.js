@@ -1,4 +1,5 @@
-// Main entry point - orchestrates everything
+// Frog Versus Predator - 3D Tabletop Simulation
+// Main entry point
 
 import * as THREE from 'three';
 import { setupCamera, setupControls, setupLighting, createTableSurface, createDecorations, createBackground, resetCamera } from './environment.js';
@@ -13,18 +14,20 @@ const loadingScreen = document.getElementById('loading-screen');
 // Scene setup
 const scene = new THREE.Scene();
 
-// Renderer setup
+// Renderer setup with high quality settings
 const renderer = new THREE.WebGLRenderer({
     canvas,
     antialias: true,
-    alpha: true
+    alpha: true,
+    powerPreference: 'high-performance'
 });
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.2;
+renderer.toneMappingExposure = 1.1;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
 
 // Camera & controls
 const camera = setupCamera(window.innerWidth / window.innerHeight);
@@ -45,7 +48,7 @@ addGrassTexture(scene, boardHexes);
 console.log('Creating pieces...');
 const pieces = initializePieces(scene, boardHexes);
 
-// Interaction
+// Interaction system
 setupInteraction(camera, scene, canvas, pieces, boardHexes);
 
 // UI Buttons
@@ -54,46 +57,47 @@ document.getElementById('reset-camera').addEventListener('click', () => {
 });
 
 document.getElementById('reset-game').addEventListener('click', () => {
-    // Reload page for now
     window.location.reload();
 });
 
-// Hide loading screen after everything is loaded
+// Hide loading screen
 setTimeout(() => {
     loadingScreen.classList.add('hidden');
-    console.log('Game loaded!');
-}, 500);
+    console.log('Frog Versus Predator - Ready!');
+}, 800);
 
 // Animation loop
 function animate() {
     requestAnimationFrame(animate);
-
-    // Update controls
+    
     controls.update();
-
-    // Update interaction animations
     updateInteraction();
-
-    // Render scene
+    
     renderer.render(scene, camera);
 }
 
-// Start animation loop
 animate();
 
 // Handle window resize
 window.addEventListener('resize', () => {
     const aspect = window.innerWidth / window.innerHeight;
-    const frustumSize = 600;
-
+    const frustumSize = 500;
+    
     camera.left = -frustumSize * aspect / 2;
     camera.right = frustumSize * aspect / 2;
     camera.top = frustumSize / 2;
     camera.bottom = -frustumSize / 2;
     camera.updateProjectionMatrix();
-
+    
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 });
 
-console.log('Frog Versus Predator 3D - Game Initialized!');
+// Export for debugging
+window.gameDebug = {
+    scene,
+    camera,
+    controls,
+    boardHexes,
+    pieces
+};

@@ -1,40 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Frog Versus Predator 3D</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Frog Versus Predator - 3D Tabletop</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐸</text></svg>">
 </head>
 <body>
-  <canvas id="game-canvas"></canvas>
-  
-  <div id="ui-overlay">
-    <h1>FROG VERSUS PREDATOR</h1>
-    <div id="controls">
-      <button id="reset-camera" class="game-button">Reset Camera</button>
-      <button id="reset-game" class="game-button">New Game</button>
+    <canvas id="game-canvas"></canvas>
+    
+    <div id="ui-overlay">
+        <h1>FROG VERSUS PREDATOR</h1>
+        <div id="controls">
+            <button id="reset-camera" class="game-button">
+                <span class="btn-icon">🎥</span>
+                Reset View
+            </button>
+            <button id="reset-game" class="game-button">
+                <span class="btn-icon">🔄</span>
+                New Game
+            </button>
+        </div>
+        <div id="instructions">
+            <p><span class="icon">🖱️</span> Click & drag pieces to move</p>
+            <p><span class="icon">🔄</span> Right-click + drag to rotate</p>
+            <p><span class="icon">🔍</span> Scroll wheel to zoom</p>
+            <p><span class="icon">📱</span> Touch: drag piece, pinch to zoom</p>
+        </div>
     </div>
-    <div id="instructions">
-      <p>🎮 Click and drag pieces to move them</p>
-      <p>🖱️ Right-click + drag to rotate camera</p>
-      <p>🔍 Scroll to zoom</p>
+    
+    <div id="loading-screen">
+        <div class="loader-container">
+            <div class="frog-loader">🐸</div>
+            <p>Loading game board...</p>
+        </div>
     </div>
-  </div>
-  
-  <div id="loading-screen">
-    <div class="loader"></div>
-    <p>Loading game...</p>
-  </div>
-  
-  <script type="importmap">
-    {
-      "imports": {
-        "three": "https://esm.sh/three@0.168.0",
-        "three/addons/": "https://esm.sh/three@0.168.0/examples/jsm/"
-      }
-    }
-  </script>
-  <script type="module" src="./src/main.js"></script>
+    
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://esm.sh/three@0.168.0",
+                "three/addons/": "https://esm.sh/three@0.168.0/examples/jsm/"
+            }
+        }
+    </script>
+    <script type="module" src="./src/main.js"></script>
 </body>
 </html>
