@@ -1,90 +1,123 @@
-# Frog vs Predator 3D
+# Frog Versus Predator - 3D Tabletop Simulation
 
-A fully interactive 3D board game recreation with a clay/plastic toy aesthetic, built with Three.js.
+A fully interactive 3D recreation of the "Frog Versus Predator" board game built with Three.js. This tabletop simulator allows you to pick up and move game pieces just like playing with a physical board game.
 
-![Game Screenshot](docs/game_screenshot.png)
+## 🎮 Live Demo
 
-## 🎮 Play the Game
+**Production**: https://frogsvspredators.pages.dev
 
-Simply open `index.html` in a modern web browser (Chrome, Firefox, Safari, or Edge).
+## ✨ Features
 
-**Requirements:**
-- Modern browser with WebGL support
-- Internet connection (for Three.js CDN on first load)
+### Completed Features
+- **Accurate Board Recreation**: 5 concentric hexagonal rings with proper terrain types
+  - Deep water (dark blue) at center
+  - Medium water (blue) in ring 1
+  - Light water/green mix in ring 2
+  - Various green and dirt tiles in rings 3-4
+  - Orange/coral and green border tiles in ring 5
+  
+- **Game Pieces**: All pieces are draggable 3D models
+  - 🐸 Frogs in 4 colors (green, yellow, purple, orange)
+  - 🐟 Fish pieces
+  - 🐦 Herons (wading birds)
+  - 🐍 Snakes
+  - 🌳 Trees with seasonal foliage (green, orange, red, bare)
+  - ☀️ Sun token
+  - ☁️ Cloud tokens
+  - 🌧️ Rain cloud with droplets
 
-## 🎯 Features
+- **Tile Icons**: Silhouette icons on tiles showing:
+  - Frogs, snakes, herons, fish
+  - Bugs, mosquitoes, dragonflies
+  - Deer, foxes
 
-- **3D Hexagonal Board** - Accurate recreation with multiple terrain types
-- **Clay/Plastic Aesthetic** - Soft shadows, rounded edges, toy-like materials
-- **Interactive Pieces** - Drag and drop frogs, fish, foxes, and birds
-- **Smooth Animations** - Hop up, float, and bounce down effects
-- **Isometric Camera** - Orbit controls for rotation and zoom
-- **Decorative Environment** - Sun, clouds, trees, and wooden table
+- **Tabletop Controls**:
+  - Click & drag pieces to move them
+  - Right-click + drag to rotate the view
+  - Scroll wheel to zoom in/out
+  - Touch support for mobile devices
 
-## 🕹️ How to Play
+- **Smooth Animations**:
+  - Hop up animation when picking up pieces
+  - Float animation while dragging
+  - Bounce landing animation when dropping
+  - Hex highlighting when hovering over valid placement
 
-1. **Select a piece** - Click on any frog, fish, fox, or bird
-2. **Move it** - Drag to any hex on the board
-3. **Release** - Piece will bounce into place
-4. **Rotate view** - Right-click + drag to orbit camera
-5. **Zoom** - Scroll to zoom in/out
-6. **Reset** - Click "Reset Camera" to return to default view
+## 🕹️ Controls
+
+| Action | Desktop | Mobile |
+|--------|---------|--------|
+| Pick up piece | Left click + drag | Tap + drag |
+| Rotate view | Right click + drag | Two-finger drag |
+| Zoom | Scroll wheel | Pinch |
+| Reset view | Click "Reset View" button | Tap button |
 
 ## 🛠️ Technology Stack
 
-- **Three.js r168** - 3D graphics library
-- **Vanilla JavaScript** - ES Modules
-- **WebGL** - Hardware-accelerated rendering
-- **OrbitControls** - Camera manipulation
+- **Three.js** - 3D rendering engine
+- **ES Modules** - Modern JavaScript modules via ESM.sh
+- **Cloudflare Pages** - Edge deployment
 
 ## 📁 Project Structure
 
 ```
-├── index.html              # Entry point
-├── style.css              # Styling
-└── src/
-    ├── main.js            # Scene orchestration
-    ├── config.js          # Game constants & board layout
-    ├── utils.js           # Hexagon math utilities
-    ├── board.js           # Hex grid generation
-    ├── pieces.js          # 3D piece models
-    ├── animations.js      # Movement animations
-    ├── interaction.js     # Drag-and-drop system
-    └── environment.js     # Camera, lighting, decorations
+webapp/
+├── index.html          # Main HTML entry point
+├── style.css           # UI styles and animations
+├── src/
+│   ├── main.js         # Entry point, scene setup
+│   ├── config.js       # Game configuration, board layout
+│   ├── board.js        # Hexagonal board generation
+│   ├── pieces.js       # 3D game piece models
+│   ├── environment.js  # Lighting, camera, table
+│   ├── interaction.js  # Drag & drop system
+│   ├── animations.js   # Movement animations
+│   └── utils.js        # Hex math utilities
+└── ecosystem.config.cjs # PM2 config for local dev
 ```
-
-## 🎨 Aesthetic Details
-
-The game features a toy-like aesthetic inspired by clay and plastic board games:
-
-- **Soft Shadows** - PCFSoftShadowMap for realistic toy appearance
-- **Rounded Geometry** - Beveled edges on all hexagons
-- **Material Variety** - Glossy water, matte grass, rough clay rocks
-- **Smooth Animations** - 60fps with elastic easing and bounce effects
 
 ## 🚀 Development
 
-No build process required! The project uses ES Modules loaded directly in the browser.
+### Local Development
+```bash
+# Start local server
+npm install -g serve
+serve -l 3000 .
 
-To modify the game:
-1. Edit files in the `src/` directory
-2. Refresh your browser to see changes
-3. Check browser console for any errors
+# Or with PM2
+pm2 start ecosystem.config.cjs
+```
 
-### Key Configuration
+### Deploy to Cloudflare Pages
+```bash
+npx wrangler pages deploy . --project-name frogsvspredators
+```
 
-Edit `src/config.js` to modify:
-- Board layout (hex terrain types)
-- Initial piece positions
-- Animation timings
-- Terrain colors and heights
+## 📊 Data Architecture
 
-## 📝 License
+- **Board Layout**: Hexagonal grid using axial coordinates (q, r)
+- **Terrain Types**: 8 terrain types with unique colors and heights
+- **Pieces**: Stored in scene with userData for position tracking
 
-MIT License - Feel free to use and modify!
+## 🎯 User Guide
 
-## 🎉 Credits
+1. **Moving Pieces**: Click on any game piece and drag it to a new hex tile
+2. **Valid Placements**: Hexes highlight yellow when you can drop a piece
+3. **Rotating View**: Right-click and drag to rotate around the board
+4. **Zooming**: Use scroll wheel to get closer or further from the board
+5. **Reset**: Click "Reset View" to return to default camera position
 
-Created as a 3D recreation of the Frog Versus Predator board game.
+## 📝 Deployment Status
 
-Built with ❤️ using Three.js
+- **Platform**: Cloudflare Pages
+- **Status**: ✅ Active
+- **Last Updated**: November 25, 2025
+
+## 🔗 Links
+
+- **Production**: https://frogsvspredators.pages.dev
+- **GitHub**: https://github.com/Eggmanaa/Frog-vs-Predator
+
+## 📜 License
+
+MIT License - Feel free to use and modify for your own projects!
